@@ -21,3 +21,11 @@ npm install express
 
 - npm install detenv
 - create .env and add custom API URL
+
+## http request logger
+
+npm i morgan
+
+## connect backend to MongoDB
+
+npm install mongoose
