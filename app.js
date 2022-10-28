@@ -14,7 +14,12 @@ app.use(morgan('tiny'));
 
 // http://localhost:3000/api/v1/
 app.get(`${api}/orders/get`, (req, res) => {
-    res.send('<h1>Hello Ayurweda App !<h1>');
+    const product = {
+        Doc_id : '1',
+        Plant_name: 'Kohomba',
+        Comment: 'need 400g',
+    }
+    res.send(product);
 })
 
 app.post(`${api}/orders/post`, (req, res) => {
