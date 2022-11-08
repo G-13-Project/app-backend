@@ -19,7 +19,7 @@ npm install express
 
 ## install dotenv and set environment variables
 
-- npm install detenv
+- npm install dotenv
 - create .env and add custom API URL
 
 ## http request logger

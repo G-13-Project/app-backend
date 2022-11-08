@@ -12,7 +12,7 @@
     "url": "git+https://github.com/G-13-Project/app-backend.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Chathuranga",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/G-13-Project/app-backend/issues"
@@ -21,7 +21,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.7.0",
+    "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
   }
