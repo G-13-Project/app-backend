@@ -12,6 +12,7 @@ router.get(`/get`, async (req, res) => {
     res.send(orderList);
 });
 
+// post order
 router.post(`/post`, (req, res) => {
     const order = new Order({
         doc_id: req.body.doc_id,
@@ -30,5 +31,23 @@ router.post(`/post`, (req, res) => {
     })
   
 });
+
+// update orders
+router.put('/put/:id', async(req, res) => {
+    const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {
+            plant_name: req.body.plant_name,
+            note: req.body.note,
+            quantity: req.body.quantity
+        },
+        {new: true} // if not update, return old data after put request
+    )
+    if(!order){
+        return res.status(404).send('The order cannot be created!');
+    }
+
+    res.send(order);
+})
 
 module.exports = router;
