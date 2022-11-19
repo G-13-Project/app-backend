@@ -48,6 +48,20 @@ router.put('/put/:id', async(req, res) => {
     }
 
     res.send(order);
+});
+
+// delete order
+router.delete('/delete/:id', (req, res) => {
+    Order.findByIdAndRemove(req.params.id).then(async order => {
+        if(order){
+            return res.status(200).json({success: true, message: 'The Order was deleted!'})
+        } else {
+            return res.status(404).json({success: false, message: 'The product is not funded!'})
+        }
+    }).catch(err => {
+        return res.status(500).json({success: false, error: err})
+    })
 })
+
 
 module.exports = router;
