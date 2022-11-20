@@ -72,4 +72,41 @@ router.delete('/:id', (req, res) => {
     })
 });
 
+// get doctor list
+router.get('/doclist', async (req, res) => {
+    const filter = {title: 'doctor'}
+    const doctors = await User.find(filter).populate("fname");
+
+    if(!doctors) {
+        res.status(500).json({success: false})
+    }
+
+    res.send(doctors);
+});
+
+// get researcher list
+router.get('/reslist', async(req, res) => {
+    const filter = {title: 'researcher'}
+    const researchers = await User.find(filter).populate("fname");
+
+    if(!researchers) {
+        res.status(500).json({success: false})
+    }
+
+    res.send(researchers);
+})
+
+// get dealer list
+router.get('/deallist', async (req, res) => {
+    const filter = {title: 'doctor'}
+    const dealers = await User.find(filter).populate("fname");
+
+    if(!dealers) {
+        res.status(500).json({success: false})
+    }
+
+    res.send(dealers);
+});
+
+
 module.exports = router;
