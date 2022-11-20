@@ -24,12 +24,14 @@ const api = process.env.API_URL;
 const ordersRouter = require('./routers/orders');
 const usersRouter = require('./routers/users');
 const docPostRouter = require('./routers/docPosts');
+const resPostRouter = require('./routers/resPosts');
 
 
 // use api routers
 app.use(`${api}/orders`, ordersRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/docpost`, docPostRouter);
+app.use(`${api}/respost`, resPostRouter);
 
 
 // connect db
