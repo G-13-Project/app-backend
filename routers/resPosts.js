@@ -20,6 +20,7 @@ router.post('/post', async(req, res) => {
     })
 })
 
+
 // get post
 router.get(`/get`, async (req, res) => {
     const postList = await ResPost.find();
@@ -29,6 +30,7 @@ router.get(`/get`, async (req, res) => {
     }
     res.send(postList);
 });
+
 
 // update post
 router.put('/put/:id', async(req, res) => {
@@ -47,4 +49,20 @@ router.put('/put/:id', async(req, res) => {
 
     res.send(post);
 });
+
+
+// delete post
+router.delete('/delete/:id', (req, res) => {
+    ResPost.findByIdAndRemove(req.params.id).then(async post => {
+        if(post){
+            return res.status(200).json({success: true, message: 'The Post was deleted!'})
+        } else {
+            return res.status(404).json({success: false, message: 'The Post is not funded!'})
+        }
+    }).catch(err => {
+        return res.status(500).json({success: false, error: err})
+    })
+})
+
+
 module.exports = router;

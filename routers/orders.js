@@ -56,7 +56,7 @@ router.delete('/delete/:id', (req, res) => {
         if(order){
             return res.status(200).json({success: true, message: 'The Order was deleted!'})
         } else {
-            return res.status(404).json({success: false, message: 'The product is not funded!'})
+            return res.status(404).json({success: false, message: 'The Order is not funded!'})
         }
     }).catch(err => {
         return res.status(500).json({success: false, error: err})
