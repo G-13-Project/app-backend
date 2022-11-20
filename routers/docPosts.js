@@ -20,4 +20,14 @@ router.post('/post', async(req, res) => {
     })
 })
 
+// get post
+router.get(`/get`, async (req, res) => {
+    const postList = await DocPost.find();
+
+    if(!postList) {
+        res.status(500).json({success: false});
+    }
+    res.send(postList);
+});
+
 module.exports = router;
