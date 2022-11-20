@@ -57,6 +57,19 @@ router.post('/login', async(req, res) => {
     } else {
         res.status(400).send('Password is Wrong !');
     }
-})
+});
+
+// delete user
+router.delete('/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id).then(user => {
+        if(user){
+            return res.status(200).json({success: true, message: 'The user was deleted !'})
+        } else {
+            return res.status(404).json({success: false, message: 'The user is not founded !'})
+        }
+    }).catch(err => {
+        return res.status(500).json({success: false, error: err})
+    })
+});
 
 module.exports = router;
