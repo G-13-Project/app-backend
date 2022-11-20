@@ -30,4 +30,21 @@ router.get(`/get`, async (req, res) => {
     res.send(postList);
 });
 
+// update post
+router.put('/put/:id', async(req, res) => {
+    const post = await DocPost.findByIdAndUpdate(
+        req.params.id,
+        {
+            header: req.body.header,
+            content: req.body.content,
+            image: req.body.image
+        },
+        {new: true} // if not update, return old data after put request
+    )
+    if(!post){
+        return res.status(404).send('The post cannot be created!');
+    }
+
+    res.send(post);
+});
 module.exports = router;
