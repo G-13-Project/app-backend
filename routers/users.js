@@ -75,7 +75,7 @@ router.delete('/:id', (req, res) => {
 // get doctor list
 router.get('/doclist', async (req, res) => {
     const filter = {title: 'doctor'}
-    const doctors = await User.find(filter).populate("fname");
+    const doctors = await User.find(filter).select("fname").populate('district').populate('contact_no');
 
     if(!doctors) {
         res.status(500).json({success: false})
@@ -87,7 +87,7 @@ router.get('/doclist', async (req, res) => {
 // get researcher list
 router.get('/reslist', async(req, res) => {
     const filter = {title: 'researcher'}
-    const researchers = await User.find(filter).populate("fname");
+    const researchers = await User.find(filter).select("fname").populate('district').populate('contact_no');
 
     if(!researchers) {
         res.status(500).json({success: false})
@@ -98,8 +98,8 @@ router.get('/reslist', async(req, res) => {
 
 // get dealer list
 router.get('/deallist', async (req, res) => {
-    const filter = {title: 'doctor'}
-    const dealers = await User.find(filter).populate("fname");
+    const filter = {title: 'dealer'}
+    const dealers = await User.find(filter).select("fname").populate('district').populate('contact_no');
 
     if(!dealers) {
         res.status(500).json({success: false})
