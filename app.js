@@ -2,21 +2,32 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 require('dotenv/config');
-const {json} = require('express');
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
+
+app.use(cors());
+// http request
+app.options('*', cors());
+
+// for indentify post request json file format (Middleware)
+app.use(bodyParser.json());
+app.use(morgan('tiny'));
+app.use(authJwt());
+app.use(errorHandler);
 
 const api = process.env.API_URL;
 
-// for identify post request json file format in middleware
-
 // import routers
 const ordersRouter = require('./routers/orders');
+const usersRouter = require('./routers/users');
 
-app.use(express.json());
-app.use(morgan('tiny'));
 
 // use api routers
 app.use(`${api}/orders`, ordersRouter);
+app.use(`${api}/users`, usersRouter);
 
 
 // connect db

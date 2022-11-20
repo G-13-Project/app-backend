@@ -29,3 +29,23 @@ npm i morgan
 ## connect backend to MongoDB
 
 npm install mongoose
+
+## Cross origin resource sharing
+
+npm install cors
+
+## password hashing
+
+npm i bcryptjs
+
+## jwt token
+
+npm i jsonwebtoken
+
+## express-jwt
+
+npm i express-jwt
+
+## body parser
+
+npm i body-parser
