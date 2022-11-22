@@ -1,13 +1,49 @@
 const {DocPost} = require('../models/docPost');
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+
+// upload file type extentions
+const FILE_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+
+// upload images
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      const isValid = FILE_TYPE_MAP[file.mimetype];  
+      let uploadError = new Error('Invalid image type');
+
+      if(isValid){
+        uploadError = null;
+      }
+      // update folder path
+      cb(null, 'E:/NDT/Sem_3/Project I/BackEnd/app-backend/public/uploads/doc')
+    },
+    filename: function (req, file, cb) {
+      
+      const fileName = file.originalname.split(' ').join('-');
+      const extension = FILE_TYPE_MAP[file.mimetype];
+      cb(null, `${fileName}-${Date.now()}.${extension}`);
+    }
+  })
+  
+  const uploadOptions = multer({ storage: storage })
 
 // create doctor post
-router.post('/post', async(req, res) => {
+router.post('/post', uploadOptions.single('image'), async(req, res) => {
+
+    // image file name
+    const fileName = req.file.filename;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/doc`;
+    console.log('Base Path: ', basePath);
     let docPost = new DocPost({
         header: req.body.header,
         content: req.body.content,
-        image: req.body.image
+        image: `${basePath}${fileName}`
     })
 
     docPost.save().then((createPost => {
