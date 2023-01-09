@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
         required: true,
     },
     contact_no: {
-        type: String,
+        type: Number,
         required: true,
     },
     nic: {

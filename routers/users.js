@@ -59,7 +59,7 @@ router.post('/login', async(req, res) => {
     }
 });
 
-// delete user
+// delete user - admin function/hiden
 router.delete('/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id).then(user => {
         if(user){
